@@ -1,0 +1,39 @@
+USE [Sample]
+GO
+CREATE TABLE tblPerson1
+(
+PersonID INT IDENTITY(1,1) PRIMARY KEY, /*automatically set assigned a identity number for the record *  first 1 identity increment, second 1 represents for indentity seed */
+[Name] NVARCHAR(50)
+)
+
+INSERT INTO tblPerson1 VALUES 
+('Jane'),
+('Mike'),
+('Sara')
+
+SELECT * FROM tblPerson1
+
+DELETE FROM tblPerson1 WHERE PersonID = 1
+
+SELECT * FROM tblPerson1 /*delete the first record from tblPerson1, and try to insert value again */
+
+INSERT INTO tblPerson1 Values ('May') /*1 will not be reassigned to the new record */
+
+SELECT * FROM tblPerson1
+
+/*if you try to reinsert a number 1 record, then try the following query, u will get an error*/
+INSERT INTO tblPerson1 Values (1, 'Jane')
+/*ERROR: An explicit value for the identity column in table 'tblPerson1' can only be specified when a column list is used and IDENTITY_INSERT is ON.
+*/
+
+/*SO you need to meet the 2 requirments the error warning mentioned, one is to set the INDENTITY_INSERT ON, second is to identity column names when insert the new record. let try */
+SET IDENTITY_INSERT tblPerson1 ON
+INSERT INTO tblPerson1 (PersonID, Name) VALUES (1, 'Jane')
+SET IDENTITY_INSERT tblPerson1 OFF /*if you didnt set it to off, you need to specific the columns names everytime when you insert the data*/
+
+/**try delete all the rows, and when you add new record, the assigned number is not from 1, then you need to reset identity seed ===> reseed **/
+DELETE FROM tblPerson1
+DBCC CHECKIDENT (tblPerson1, RESEED, 0)
+/*Checking identity information: current identity value '4'.
+DBCC execution completed. If DBCC printed error messages, contact your system administrator.
+*/
