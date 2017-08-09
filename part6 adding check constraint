@@ -1,0 +1,16 @@
+USE [Sample]
+GO
+ALTER TABLE tblPerson 
+ADD CONSTRAINT CK_tblPerson_Age
+CHECK (AGE > 0 AND AGE < 150)
+
+SELECT * FROM tblPerson
+
+INSERT INTO tblPerson VALUES(10,'Sara', 's@ss.com',1, 970)
+/*  
+Msg 547, Level 16, State 0, Line 9
+The INSERT statement conflicted with the CHECK constraint "CK_tblPerson_Age". The conflict occurred in database "Sample", table "dbo.tblPerson", column 'Age'.
+The statement has been terminated.
+*/
+ALTER TABLE tblPerson
+DROP CONSTRAINT CK_tblPerson_Age
