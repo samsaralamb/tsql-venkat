@@ -1,1 +1,2 @@
 DELETE FROM tblGender WHERE ID = 2
+/* No action/Set Null/Cascede/Set Default */
