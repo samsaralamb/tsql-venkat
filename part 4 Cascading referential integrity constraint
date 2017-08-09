@@ -1,0 +1,1 @@
+DELETE FROM tblGender WHERE ID = 2
