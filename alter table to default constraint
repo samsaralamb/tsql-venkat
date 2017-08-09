@@ -1,0 +1,13 @@
+ALTER TABLE tblPerson ADD CONSTRAINT DF_tblPerson_GenderID
+DEFAULT 3 FOR GenderID
+
+INSERT INTO tblPerson(ID, Name, Email) VALUES 
+(1, 'Jie', 'j@j.com'),
+(2, 'John', 'jh@j.com'),
+(3, 'Mike', 'm@m.com'),
+(4, 'May', 'ma@m.com'),
+(5, 'Ada', 'a@a.com'),
+(6, 'sally', 's@s.com'),
+(7, 'ablert', 'ab@a.com'),
+(8, 'Stephanie', 's@s.com'),
+(9, 'Jaden', 'ja@j.com')
