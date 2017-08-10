@@ -1,0 +1,45 @@
+
+----User 1 Session---
+USE SAMPLE
+GO
+
+
+
+
+CREATE TABLE Test1
+(
+ID int IDENTITY(1,1),
+Value nvarchar(20)
+)
+
+CREATE TABLE Test2
+(
+ID int IDENTITY(1,1),
+Value nvarchar(20)
+)
+
+INSERT INTO Test2 Values ('zzz')
+
+SELECT IDENT_CURRENT('Test2')
+/*
+if you oen a new query, it is like a user2 session, here is the user1 session, so when both of the session insert one record into Test2 table
+
+the SCOPE IDENTITY() and @@IDENTITY return different identity numbers from IDENT_CURRENT('Tablename'), because IDENT_CURRENT also count the user2 session inserted record
+it is across the session. 
+
+*/
+INSERT INTO Test1 Values ('x')
+
+Select SCOPE_IDENTITY()
+Select @@IDENTITY
+
+Create Trigger trForInsert on Test1 for Insert
+as
+Begin
+   Insert into Test2 Values ('YYYY')
+End
+/*after the inserted value to test2 triggered, when use select SCOPE_IDENTITY function , the result is 2 for the test1 table, cause this is the second time to insert the value, the id is 2
+however the @@identiy function shows 1 this time, which represent the id value for Test2 table. because SCOPE_IDENTITY() shows the last id in the same session and same scope, here the 
+scope is just the first insert statement. "INSERT INTO Test1 Values('x')"
+
+*/
