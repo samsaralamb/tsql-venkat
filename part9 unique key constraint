@@ -1,0 +1,18 @@
+USE Sample
+Go
+
+Alter Table tblPerson 
+Add Constraint UQ_tblPerson_Email Unique (Email)
+/*
+The CREATE UNIQUE INDEX statement terminated because a duplicate key was found for the object name 'dbo.tblPerson' and the index name 'UQ_tblPerson_Email'. The duplicate key value is (s@s.com).
+Msg 1750, Level 16, State 1, Line
+*/
+
+SELECT * FROM tblPerson
+DELETE from tblPerson Where ID = 8
+
+Alter Table tblPerson 
+Add Constraint UQ_tblPerson_Email Unique (Email)
+
+Alter Table tblPerson
+Drop Constraint UQ_tblPerson_Email
