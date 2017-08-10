@@ -1,0 +1,17 @@
+Alter table tblPerson
+ADD City nvarchar(20) 
+/*add a new city column*/
+/**Insert values into specified columns**/
+Insert into tblPerson(Age, City) Values (30,'London'),(27,'New York'),
+(92,'Paris'),
+(11,'London'),
+(22,'New York');
+/*不对，不知道为啥，手动改的*/
+SELECT * FROM tblPerson
+SELECT TOP 2 age, city from tblPerson Order By Age Desc
+SELECT TOP 1 * from tblPerson Order by Age Desc
+SELECT TOP 20 PERCENT * from tblPerson Order by Age
+
+/*[Simple].[dbo].[Sample]   dbo is Schema*/
+
+/*7 typles of wildcard in sql server, % _ [] [^]  */
