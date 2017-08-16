@@ -1,0 +1,35 @@
+USE SAMPLE 
+GO
+SELECT * FROM tblEmployee
+SELECT * FROM tblDepartment
+
+
+
+Select *
+From tblEmployee E
+inner join tblDepartment D
+on E.DepartmentID = D.ID      /*两边id都有的，去掉了左表的两行右表没有的，左表是大表，10-2=8 */
+
+Select *
+From tblEmployee E
+left join tblDepartment D
+on E.DepartmentID = D.ID      /*所有左表id的，10行记录*/
+Where D.ID IS NULL /*E.DepartmentID IS NULL*/
+
+Select *
+From tblEmployee E
+right join tblDepartment D
+on E.DepartmentID = D.ID     /*所有属于右表id的records， 加上一条右表自有id的, 9行记录 */
+Where E.DepartmentID IS NULL
+
+
+SELECT *
+FROM tblEmployee E
+full JOIN tblDepartment D
+ON E.DepartmentID = D.ID
+Where E.DepartmentID IS NULL
+OR D.ID IS NULL
+
+Select *
+From tblEmployee E
+cross join tblDepartment D  /*mutiply two tables, 4 * 10 records*/
