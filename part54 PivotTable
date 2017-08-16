@@ -1,0 +1,19 @@
+/**Select SalesAgent, India,US, UK
+FROM tblProductSales
+PIVOT
+(
+      SUM(SalesAmount)
+	  FOR SalesCountry
+	  IN ([India],[US], [UK])
+)
+AS PivotTable **/
+
+Select SalesCountry, David, John
+FROM tblProductSales
+PIVOT
+(
+      AVG(SalesAmount)
+	  FOR SalesAgent
+	  IN ([David],[John])
+)
+AS PivotTable
