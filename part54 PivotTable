@@ -8,8 +8,13 @@ PIVOT
 )
 AS PivotTable **/
 
+/*if there is an ID column, then just select the columns you need in the resulttable*/
 Select SalesCountry, David, John
+From
+(Select SalesCountry, SalesAgent, SalesAmount
 FROM tblProductSales
+) AS sourceTable
+
 PIVOT
 (
       AVG(SalesAmount)
