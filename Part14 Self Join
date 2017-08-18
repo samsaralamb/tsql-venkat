@@ -1,0 +1,30 @@
+--Self Join
+USE Sample
+Go
+
+--left join five records, same as the original table
+SELECT * FROM EmployeeM 
+Select E.Name Employee, M.Name Manager 
+From EmployeeM E 
+LEFT JOIN EmployeeM M
+ON E.ManagerID = M.EmployeeID
+
+--right join ??????? 7 records, include 3 records for manager mike, because he manages 3 employees, 1 records for todd, cause he manages mike, 3 employees record who dont have a manager id
+
+SELECT * FROM EmployeeM 
+Select E.Name Employee, M.Name Manager 
+From EmployeeM E 
+Right JOIN EmployeeM M
+ON E.ManagerID = M.EmployeeID
+
+--inner join 4 records all the matching rows, todd donnot have a manager, so deleted this rows
+SELECT * FROM EmployeeM
+Select E.ManagerID, E.Name Employee, M.Name Manager 
+From EmployeeM E 
+INNER JOIN EmployeeM M
+ON E.ManagerID = M.EmployeeID
+
+--cross join 25 records
+Select E.ManagerID, E.Name Employee, M.Name Manager 
+From EmployeeM E 
+CROSS JOIN EmployeeM M
