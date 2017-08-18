@@ -1,0 +1,13 @@
+
+--UNION ALL combines rows from two or more tables 2gether with Duplicate rows
+Select * From P17CNCustomer
+UNION ALL
+Select * From P17USCustomer
+
+
+--UNION distinct sort, no duplicate rows
+Select * From P17CNCustomer
+UNION ALL
+Select * From P17USCustomer
+
+--different between Join and Union : Join combines columns, Union combines rows
