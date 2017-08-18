@@ -1,0 +1,23 @@
+--ISNULL function, change the null value in a column into the Strings you want
+Select * From EmployeeM
+Select E.Name Emloyee,
+       ISNULL(M.Name,'No manager') Manager
+From EmployeeM E 
+Left Join EmployeeM M
+On E.ManagerID = M.EmployeeID
+
+--COALESCE function, change the non value to the first non null value, similar with ISNULL, but more powerful
+Select * From EmployeeM
+Select E.Name Emloyee,
+       Coalesce(M.Name,'No manager') Manager
+From EmployeeM E 
+Left Join EmployeeM M
+On E.ManagerID = M.EmployeeID
+    
+--CASE statement
+Select * From EmployeeM
+Select E.Name Emloyee,
+CASE When M.Name IS NULL THEN 'No Manager' ELSE M.Name END
+From EmployeeM E 
+Left Join EmployeeM M
+On E.ManagerID = M.EmployeeID
