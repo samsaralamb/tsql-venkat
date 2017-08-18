@@ -1,0 +1,4 @@
+--Coalesce() function return the first non null value, the priortity decide on what you put first
+Select * from P16Employee
+Select Id, Coalesce(LastName,FirstName, MiddleName)
+From P16Employee
