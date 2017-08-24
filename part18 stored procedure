@@ -1,0 +1,33 @@
+
+--a simple sp
+CREATE PROC spGetEmployees
+AS 
+BEGIN
+    Select Name, Gender from tblEmployee
+END
+
+--sp with input parameters
+spGetEmployees
+CREATE PROC spGetEmployeesByGenderAndDepartmentId
+@Gender nvarchar(20),
+@DepartmentId int
+AS
+BEGIN
+    Select Name, Gender,DepartmentId from tblEmployee
+	Where Gender = @Gender and DepartmentId = @DepartmentId
+END
+--when execute this sp, the order is important. you should first give the gender parameter, then departmentid parameter, otherwise the string cannot cast into int whicht cause error
+
+
+--alter sp
+ALTER PROC spGetEmployeesByGenderAndDepartmentId
+AS
+BEGIN
+Select Name, Gender,DepartmentId from tblEmployee
+	Where Gender = @Gender and DepartmentId = @DepartmentId
+	ORDER BY Name
+	WITH ENCRYPTION --other people cannot see the text of this sp
+END 
+
+DROP spGetEmployeesByGenderAndDepartmentId --Delete sp
+sp_helptext spGetEmployees --get the text of the sp.
