@@ -1,0 +1,36 @@
+--part 101 Grouping set
+SELECT * FROM EmployeesG; 
+
+
+--1. if I want group by Country, Gender, and the sum of salary, along with only the sum of salary, group by country
+--Method 1: Using UNION ALL
+SELECT Country, Gender, SUM(Salary) FROM EmployeesG  --retrieve the sum of salary group by country then gender.
+GROUP BY Country,Gender
+
+UNION ALL
+
+SELECT Country, NULL, SUM(Salary) FROM EmployeesG --retrieve the sum of salary group by only country.
+GROUP BY Country
+
+UNION ALL
+
+SELECT NULL, Gender, SUM(Salary) FROM EmployeesG --retrive the sum of salary group by only gender
+GROUP BY Gender
+
+UNION ALL
+
+SELECT NULL, NULL, SUM(Salary) FROM EmployeesG --retrieve the grand total of the salary.
+
+--Method2: Grouping Sets
+
+SELECT Country, Gender, SUM(Salary) [Total Salary]
+FROM EmployeesG
+GROUP BY 
+ GROUPING SETS
+ (
+ (Country, Gender), -- sum salary by Country, Gender
+ (Country),  --sum salary by Country
+ (Gender), --sum salary by Gender
+ ()  --grand total
+ )
+ ORDER BY GROUPING(Country), GROUPING(Gender),Gender
