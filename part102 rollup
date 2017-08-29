@@ -1,0 +1,29 @@
+--Part102 Group by with roll up
+--Retrieve the sum of salary by different columns along with grand total
+SELECT Country, Gender, SUM(Salary) FROM EmployeesG
+GROUP BY ROLLUP(Country,Gender)
+
+--union all method
+
+SELECT Country, Gender, SUM(Salary) FROM EmployeesG
+GROUP BY Country,Gender
+
+UNION ALL
+
+SELECT Country,NULL, SUM(Salary) FROM EmployeesG
+GROUP BY Country
+
+UNION ALL
+
+SELECT NULL, NULL, SUM(Salary) FROM EmployeesG
+
+--Grouping sets methods
+
+SELECT Country, Gender, SUM(Salary) FROM EmployeesG
+GROUP BY
+ GROUPING SETS
+ (
+ (Country, Gender),
+ (Country),
+ ()
+ )
