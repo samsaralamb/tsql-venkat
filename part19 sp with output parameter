@@ -1,0 +1,25 @@
+Select * from TblEmployee
+--DROP  Proc spGetEmployeeCountByGender
+Create Proc spGetEmployeeCountByGender
+@Gender nvarchar(20),  --input parameter ,you have to pass sth to it
+@EmployeeCount int OUTPUT -- output parameter, give you sth back
+as
+Begin
+   Select @EmployeeCount = Count(ID) From TblEmployee Where Gender = @Gender
+End
+
+Declare @TotalCount int --the data type should be same with the output parameter to hold the value.
+Exec spGetEmployeeCountByGender 'Male', @TotalCount OUTPUT  --need to use output or out after this variable, otherwise, the initialize will not be executed, the value is null)
+if @TotalCount IS NULL Print '@TotalCount is NULL'
+else Print '@TotalCount is not NULL'
+Print @TotalCount
+
+--System Sp
+sp_help spGetEmployeeCountByGender --get the detailed information of any database object
+sp_help TblEmployee
+
+sp_helptext spGetEmployeeCountByGender --get the sql scripts of this sp
+
+sp_depends TblEmployee --get all the sps under this table
+
+sp_depends spGetEmployeeCountByGender -- view the dependencies. get which tables and columns are used in this up.
