@@ -1,0 +1,54 @@
+--part20 Differences between return value and output parameter
+
+--example one: both return value and output parameter get the corret answer
+--output parameter
+DROP PROC spGetEmployeeCount1 
+Create proc spGetEmployeeCount1 
+@Count int OUT
+as
+Begin
+  Select @Count = Count(ID) From TblEmployee
+End
+
+Declare @Total int
+Exec spGetEmployeeCount1 @Total OUT
+Print @Total
+
+--Return value
+Create proc spGetEmployeeCount2
+
+as
+Begin
+  RETURN (Select Count(ID) From TblEmployee)
+End
+
+Declare @Total int
+Exec @Total = spGetEmployeeCount2
+Print @Total
+
+--example two: return value failure, output paremeter success
+Drop Proc spGetNameByID
+Create Proc spGetNameByID
+@ID int,
+@Name nvarchar(20) OUT
+as
+Begin
+   Select @Name = Name from TblEmployee where ID = @ID
+End
+
+Declare @Employee nvarchar(20)
+Exec spGetNameByID 1, @Employee OUT
+Print @Employee
+
+Create Proc spGetNameByID2
+@ID int 
+as
+Begin
+  Return (Select Name from tblEmployee where ID = @ID)
+End
+
+Declare @Employee nvarchar(20)
+Exec @Employee = spGetNameByID2 1
+Print @Employee
+--Msg 245, Level 16, State 1, Procedure spGetNameByID2, Line 5 [Batch Start Line 49]
+--Conversion failed when converting the nvarchar value 'Tom' to data type int.
