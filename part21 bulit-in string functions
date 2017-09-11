@@ -1,0 +1,47 @@
+/** ASCII function to return the ASCII code values of the given charactor experession **/
+--ASCII(expression varchar) RETURNS int, between 0~255
+Select ASCII('A')
+--result:65
+Select ASCII('ABC')
+--result: 65 only the first charactor returned
+
+/**CHAR() convert ASCII code to character **/
+
+Select CHAR(65)
+--result: A
+
+/**print A to Z **/
+
+Declare @start int
+Set @start = 65
+While (@start <=90)
+Begin
+Print Char(@start)
+Set @start = @start +1
+End
+
+/*LTRIM()  remove blanks in the left side  */
+
+Select LTRIM('     hello')
+--result: hello
+
+/*RTRIM()  remove blanks in the RIGHT side  */
+
+Select RTRIM('hello   ')
+--result: hello
+
+--remove both the right side and left side white spaces
+
+Select LTRIM(RTRIM('      HELLO     '))
+
+/**LOWER(), UPPER() GET LOWERCASE AND UPPERCASE OF THI GIVEN STRINGS
+
+/*REVERSE()  **/ reverse the string. sam -> mas */
+
+/*LEN() !!!!!!!!!!!!!!!  Return the count of total characters, excluding the blanks at the end of the expression*/ 
+
+Select LEN('    sam  ')
+--result: 7, 4 blanks in front of sam
+
+Select LEN(LTRIM('    sam  '))
+--Result: 3, 4 blanks removed
