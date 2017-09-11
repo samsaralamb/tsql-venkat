@@ -1,0 +1,24 @@
+--Part24
+--REPLICATE() FUNCTION
+SELECT REPLICATE('Jie ',3)
+--r:Jie Jie Jie 
+
+Select LastName,FirstName,
+       Substring(Email,1,2) + REPLICATE('*',3)+SUBSTRING(Email,CHARINDEX('@',Email),LEN(Email)-CHARINDEX('@',Email)+1)
+FROM tblEmployee
+--space()
+--return the spaces
+SELECT SPACE(5)
+
+
+--PATINDEX() similar with charindex(), can use wildcard. find the specified position of the first occurance of a pattern
+SELECT Email, PATINDEX('%@aaa.com',Email)
+From tblEmployee 
+Where PATINDEX('%@aaa.com',Email) > 0
+
+--REPLACE()
+SELECT REPLACE(Email,'.com','.net')
+
+--Stuff()
+
+SELECT STUFF(Email,2,3,'*****')
