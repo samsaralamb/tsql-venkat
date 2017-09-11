@@ -1,0 +1,15 @@
+
+--PART26
+--ISDATE RETURNS 0 if it is not a date or data type is datatime2,1 if it is a date
+SELECT ISDATE(GETDATE()) --returns 1
+SELECT ISDATE('2012-08-31 21:02:04.167') --return 0
+
+--DAY() return the day number
+Select DAY('01/31/2012') --RETURNS 31
+
+--Month() --retuns the month number of the year
+SELECT MONTH('01/31/2012') --RETURN 1
+SELECT MONTH('2012-08-31 21:02:04.167')--RETURN 8
+SELECT MONTH('01/31/2012 21:02:04.167')
+
+--DateName(DatePart, Date) --get a string of the datepart
