@@ -1,0 +1,23 @@
+part27
+
+--DATEPART()
+SELECT DATEPART(weekday, '2012-08-30 19:45:31.793') --returns 5
+SELECT DATENAME(weekday, '2012-08-30 19:45:31.793')--Thursday
+
+SELECT DATEPART(WEEKDAY,GETDATE())--2 (1 is sunday)
+SELECT DATENAME(WEEKDAY,GETDATE())--MONDAY
+
+--DATEADD(datepart,numbertoadd,date)
+SELECT DATEADD(DAY,20,'2012-08-30 19:45:31.793') --2012-09-19 19:45:31.793
+SELECT DATEADD(DAY,-20,'2012-08-30 19:45:31.793') --2012-08-10 19:45:31.793
+
+--DATEDIFF(DATEPART, STARTDATE,ENDDATE)
+
+DECLARE @DOB datetime, @tempdate datetime, @years int, @months int, @days int
+SET @DOB ='10/08/1982'
+
+SELECT @tempdate = @DOB
+SELECT @years
+
+--!!!!!!!!!!!!!!!!!!!???????????????????????
+--create function fnComputeAge by use variable.. totally dont understand
