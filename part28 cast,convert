@@ -1,0 +1,4 @@
+--differences: genrally use cast()
+--cast(xx as datatype) based on ANSI standard, can be used in other database
+--convert(datatype, xx) is specific to sql server.
+conver() more flexibility by use the third parameter to get disired data format
