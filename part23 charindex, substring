@@ -1,0 +1,29 @@
+--part23
+
+--left() return the specified number of charactors from the left hand side of the given character expression
+
+SELECT LEFT('ABCDEF',3)
+
+--CHARINDEX()		return the starting position of the specified expression in a character string
+
+SELECT CHARInDEX('@','sara@aaa.com')  --if you didnt give the third parameters, it will be set as 1 by default
+ --result:5
+
+ SELECT CHARINDEX('@','sara@aaa.com',3)
+ --result;5
+
+ SELECT SUBSTRING('sara@aaa.com',6,7) --select the domain of the email,start from 1, 6 -> where do you start, 7->how many characters do you want
+ --result: aaa.com
+
+ SELECT SUBSTRING('PAM@BBB.COM', CHARINDEX('@','PAM@BBB.COM'),7)
+ --@BBB.CO
+
+  SELECT SUBSTRING('PAM@BBB.COM', CHARINDEX('@','PAM@BBB.COM')+1,7)
+  --BBB.COM
+
+  SELECT SUBSTRING('PAM@BBB.COM', CHARINDEX('@','PAM@BBB.COM')+1,LEN('PAM@BBB.COM')-CHARINDEX('@','PAM@BBB.COM'))
+  --WORKS FOR ALL THE EMAIL 
+
+ SELECT SUBSTRING(Email,CHARINDEX('@',Email)+1,LEN(Email)-CHARINDEX('@',Email)), Count(*) 
+ FROM tblEmployee as EmailDomain
+GROUP BY SUBSTRING(Email,CHARINDEX('@',Email)+1,LEN(Email)-CHARINDEX('@',Email))
