@@ -1,0 +1,40 @@
+--get student FirstName,LastName,AllContactInfo,
+--DOB,FirstVisitDate,LastVirstDate,VisitTimes.\
+
+Select users.ufname as FirstName, users.ulname as LastName,
+users.uid as AccountNumber, 
+users.upaddress as Addressline1, 
+users.upaddress2 as Address2, 
+users.upcity as City, users.upstate as State, users.zipcode as Zip, 
+users.upPhone as homePhone,
+contacts.workPhone as workPhone, 
+contacts.Email as Email,
+users.umobileno as cellPhone,
+users.ptDob as DOB,
+first.firstDate as FirstDOS,
+last.lastDate as LastDOS,
+count(inv.Id) as visits
+
+--edi_invoice, contacts, patients, users table
+From edi_invoice inv
+left join contacts on contacts.pid = inv.PatientId
+left join patients on patients.pid = inv.patientId
+left join users on users.uid = inv.patientId
+inner join
+--get the FirstVisitDate
+ (
+  Select patientId, min(ServiceDt) firstDate 
+  From edi_invoice 
+  Where year(ServiceDt) = 2017
+  Group By patientId) first
+on inv.PatientId = first.patientId
+inner join
+--Get the LastVisitDate
+ (
+  Select patientId, max(ServiceDt) lastDate 
+  From edi_invoice 
+  Where year(ServiceDt) = 2017
+  Group By patientId) last
+on inv.PatientId = last.patientId
+Where (inv.InvFacilityId = 11 or inv.InvFacilityId = 20) and YEAR(ServiceDt) = 2017
+Group By inv.patientId
